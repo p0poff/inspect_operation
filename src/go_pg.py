@@ -12,7 +12,13 @@ class db_query:
 			pass
 
 	def connect(self):
-		self.db = DB(dbname=self.auth['db'], host=self.auth['host'], port=self.auth['port'], user=self.auth['user'], passwd=self.auth['passwd'])
+		self.db = DB(
+			dbname=self.auth['db'], 
+			host=self.auth['host'], 
+			port=int(self.auth['port']), 
+			user=self.auth['user'], 
+			passwd=self.auth['pass']
+		)
 
 	def run_query(self, query, *args):
 		def send_query(q):
