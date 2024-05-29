@@ -1,7 +1,9 @@
 import conf
 import argparse
 import go_pg
-import vidgets.vidget as vidget
+import vidget
+import storage
+import view
 
 DB_CONNECT = 'db_connect'
 
@@ -37,7 +39,10 @@ def main():
 
     __db = getDb(__conf.get(DB_CONNECT, {}).get(__args.conn))
 
-    v = vidget.Vidget(__db, f_render = lambda : "Hello world")
+    v = vidget.Vidget(
+        f_get_data = storage.getOperation(db = __db, operation_id = __args.operation_id), 
+        f_render = view.operationsData
+        )
     print(v.render())
 
 
