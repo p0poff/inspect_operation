@@ -1,6 +1,7 @@
 import conf
 import argparse
 import go_pg
+import vidgets.vidget as vidget
 
 DB_CONNECT = 'db_connect'
 
@@ -11,7 +12,7 @@ def getArgs():
 	__parser.add_argument('-v', '--verbosity', action='count', dest='verb', default=0)
 	return __parser.parse_args()
 
-def getDb(conf):
+def getDb(conf) -> go_pg.db_query:
     if conf is None:
         print('[ERROR] db conf is wrong, has no %s key in conf file' % (DB_CONNECT))
         exit()
@@ -36,8 +37,8 @@ def main():
 
     __db = getDb(__conf.get(DB_CONNECT, {}).get(__args.conn))
 
-    print(__conf['db_connect'].keys())
-    print(__args.conn)
+    v = vidget.Vidget(__db, f_render = lambda : "Hello world")
+    print(v.render())
 
 
 if __name__ == '__main__':

@@ -1,2 +1,3 @@
 *.yaml
 src/__pycache__/
+src/vidgets/__pycache__/
